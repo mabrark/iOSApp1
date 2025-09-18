@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @StateObject private var store = OrderStore()
 
-#Preview {
-    ContentView()
+    var body: some View {
+        TabView {
+            OrdersView(store: store)
+                .tabItem {
+                    Label("Orders", systemImage: "cup.and.saucer.fill")
+                }
+
+            CoffeeRunTimer()
+                .tabItem {
+                    Label("Timer", systemImage: "timer")
+                }
+        }
+    }
 }
